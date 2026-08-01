@@ -1,10 +1,11 @@
-url: "https://naomz-test.netlify.app"
-logo: "Naomi Zavaglia ✦"
-nav_about: "About"
-nav_work: "Work"
-nav_skills: "Skills"
-nav_contact: "Contact"
-title: "Naomi Zavaglia — UX Designer"
-description: "Portfolio di Naomi Zavaglia, UX Designer. Progetto esperienze digitali che funzionano per chi le usa: ricerca, design system e interazione."
+url: https://naomi-zavaglia.netlify.app
+logo: Naomi Zavaglia ✦
+nav_about: About
+nav_work: Work
+nav_skills: Skills
+nav_contact: Contact
+title: Naomi Zavaglia — UX Designer
+description: "Portfolio di Naomi Zavaglia, UX Designer. Progetto esperienze
+  digitali che funzionano per chi le usa: ricerca, design system e interazione."
 share_image: ""
 favicon: ""

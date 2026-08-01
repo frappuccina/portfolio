@@ -1,0 +1,241 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "src/images/uploads"
+public_folder: "/images/uploads"
+
+collections:
+  - name: "site"
+    label: "0. Impostazioni sito e anteprima social"
+    files:
+      - name: "site"
+        label: "Impostazioni generali"
+        file: "src/_data/site.yaml"
+        fields:
+          - label: "Indirizzo del sito"
+            name: "url"
+            widget: "string"
+            hint: "Serve per l'anteprima quando condividi il link. Cambialo solo se cambi dominio."
+          - label: "Logo in alto a sinistra"
+            name: "logo"
+            widget: "string"
+            hint: "Es. il tuo nome. Puoi usare simboli come ✦"
+          - label: "Menu — voce 1 (porta a Chi sono)"
+            name: "nav_about"
+            widget: "string"
+          - label: "Menu — voce 2 (porta a Progetti)"
+            name: "nav_work"
+            widget: "string"
+          - label: "Menu — voce 3 (porta a Competenze)"
+            name: "nav_skills"
+            widget: "string"
+          - label: "Menu — voce 4 (porta a Contatti)"
+            name: "nav_contact"
+            widget: "string"
+          - label: "Titolo della pagina"
+            name: "title"
+            widget: "string"
+            hint: "Appare nella scheda del browser, su Google e nell'anteprima dei link."
+          - label: "Descrizione"
+            name: "description"
+            widget: "text"
+            hint: "1-2 frasi. Appare sotto il titolo su Google e nell'anteprima dei link. Max ~155 caratteri."
+          - label: "Immagine anteprima link (opzionale)"
+            name: "share_image"
+            widget: "image"
+            required: false
+            hint: "Mostrata quando condividi il sito su LinkedIn/WhatsApp. Ideale 1200x630 pixel."
+          - label: "Favicon (opzionale)"
+            name: "favicon"
+            widget: "image"
+            required: false
+            hint: "Icona della scheda browser. Quadrata, almeno 180x180. Se vuota resta il simbolo ✦ su sfondo verde."
+
+  - name: "hero"
+    label: "1. Sezione iniziale (Hero)"
+    files:
+      - name: "hero"
+        label: "Sezione iniziale"
+        file: "src/_data/hero.yaml"
+        fields:
+          - { label: "Nome — prima riga", name: "name_line1", widget: "string" }
+          - { label: "Nome — seconda riga", name: "name_line2", widget: "string" }
+          - { label: "Anno", name: "year", widget: "string" }
+          - { label: "Ruolo e città", name: "role", widget: "string" }
+          - { label: "Frase evidenziata (rosa)", name: "tagline_bold", widget: "string" }
+          - { label: "Testo descrittivo", name: "tagline", widget: "text" }
+          - { label: "Testo del pulsante", name: "cta_text", widget: "string" }
+
+  - name: "marquee"
+    label: "2. Striscia parole chiave"
+    files:
+      - name: "marquee"
+        label: "Parole chiave"
+        file: "src/_data/marquee.yaml"
+        fields:
+          - label: "Elementi"
+            name: "items"
+            widget: "list"
+
+  - name: "about"
+    label: "3. Chi sono"
+    files:
+      - name: "about"
+        label: "Chi sono"
+        file: "src/_data/about.yaml"
+        fields:
+          - { label: "Etichetta sezione", name: "label", widget: "string" }
+          - { label: "Titolo — riga 1", name: "heading_line1", widget: "string" }
+          - { label: "Titolo — riga 2", name: "heading_line2", widget: "string" }
+          - { label: "Titolo — parola evidenziata", name: "heading_highlight", widget: "string" }
+          - { label: "Titolo — riga 3", name: "heading_line3", widget: "string" }
+          - label: "Paragrafi"
+            name: "paragraphs"
+            widget: "list"
+          - { label: "Testo pulsante primario", name: "cta_primary_text", widget: "string" }
+          - { label: "Testo pulsante secondario (email)", name: "cta_secondary_text", widget: "string" }
+          - { label: "Foto (opzionale)", name: "photo", widget: "image", required: false }
+          - { label: "Testo mostrato se non c'è foto", name: "image_tag", widget: "string" }
+          - label: "Statistiche"
+            name: "stats"
+            widget: "list"
+            summary: "{{number}}{{suffix}} — {{label}}"
+            fields:
+              - { label: "Numero o sigla", name: "number", widget: "string" }
+              - { label: "Suffisso (es. +)", name: "suffix", widget: "string", required: false }
+              - { label: "Etichetta", name: "label", widget: "string" }
+
+  - name: "work"
+    label: "4. Progetti"
+    files:
+      - name: "work"
+        label: "Progetti"
+        file: "src/_data/work.yaml"
+        fields:
+          - { label: "Etichetta sezione", name: "label", widget: "string" }
+          - { label: "Titolo — riga 1", name: "title_line1", widget: "string" }
+          - { label: "Titolo — riga 2", name: "title_line2", widget: "string" }
+          - { label: "Testo link 'tutti i progetti'", name: "all_link_text", widget: "string", required: false }
+          - label: "URL 'tutti i progetti'"
+            name: "all_link_url"
+            widget: "string"
+            required: false
+            hint: "Lascia vuoto se non hai una pagina separata: il link sparisce invece di non fare nulla."
+          - label: "Progetto in evidenza"
+            name: "featured"
+            widget: "object"
+            fields:
+              - { label: "Tag (categoria)", name: "tag", widget: "string" }
+              - { label: "Titolo", name: "title", widget: "string" }
+              - { label: "Descrizione", name: "desc", widget: "text" }
+              - { label: "Testo pulsante", name: "cta_text", widget: "string", required: false }
+              - label: "Link al case study"
+                name: "url"
+                widget: "string"
+                required: false
+                hint: "Se vuoto, la scheda non è cliccabile e il pulsante non appare."
+              - { label: "Immagine (opzionale)", name: "image", widget: "image", required: false }
+          - label: "Altri progetti"
+            name: "items"
+            widget: "list"
+            summary: "{{title}}"
+            fields:
+              - { label: "Tag (categoria)", name: "tag", widget: "string" }
+              - { label: "Titolo", name: "title", widget: "string" }
+              - { label: "Descrizione", name: "desc", widget: "text" }
+              - { label: "Anno", name: "year", widget: "string" }
+              - label: "Link al case study"
+                name: "url"
+                widget: "string"
+                required: false
+                hint: "Se vuoto, la riga non è cliccabile e la freccia non appare."
+              - { label: "Immagine (opzionale)", name: "image", widget: "image", required: false }
+
+  - name: "skills"
+    label: "5. Competenze"
+    files:
+      - name: "skills"
+        label: "Competenze"
+        file: "src/_data/skills.yaml"
+        fields:
+          - { label: "Etichetta sezione", name: "label", widget: "string" }
+          - { label: "Titolo — riga 1", name: "heading_line1", widget: "string" }
+          - { label: "Titolo — riga 2", name: "heading_line2", widget: "string" }
+          - { label: "Titolo — parola evidenziata", name: "heading_highlight", widget: "string" }
+          - label: "Barre di competenza"
+            name: "bars"
+            widget: "list"
+            summary: "{{name}} — {{percent}}%"
+            fields:
+              - { label: "Nome competenza", name: "name", widget: "string" }
+              - { label: "Livello (testo)", name: "level", widget: "string" }
+              - { label: "Percentuale (0-100)", name: "percent", widget: "number", value_type: "int", min: 0, max: 100 }
+              - { label: "Colore barra", name: "color", widget: "select", options: ["green", "pink"] }
+          - { label: "Etichetta 'Tool'", name: "tools_label", widget: "string" }
+          - { label: "Titolo tool — riga 1", name: "tools_heading_line1", widget: "string" }
+          - { label: "Titolo tool — riga 2", name: "tools_heading_line2", widget: "string" }
+          - label: "Strumenti (chip)"
+            name: "chips"
+            widget: "list"
+            summary: "{{text}}"
+            fields:
+              - { label: "Nome strumento", name: "text", widget: "string" }
+              - { label: "Evidenziato", name: "highlight", widget: "boolean", default: false }
+          - { label: "Etichetta certificazioni", name: "certs_label", widget: "string" }
+          - label: "Certificazioni"
+            name: "certs"
+            widget: "list"
+
+  - name: "process"
+    label: "6. Processo di lavoro"
+    files:
+      - name: "process"
+        label: "Processo"
+        file: "src/_data/process.yaml"
+        fields:
+          - { label: "Etichetta sezione", name: "label", widget: "string" }
+          - { label: "Titolo", name: "title", widget: "string" }
+          - { label: "Parola evidenziata (rosa)", name: "title_highlight", widget: "string" }
+          - label: "Fasi"
+            name: "steps"
+            widget: "list"
+            summary: "{{num}} — {{title}}"
+            fields:
+              - { label: "Numero", name: "num", widget: "string" }
+              - { label: "Titolo fase", name: "title", widget: "string" }
+              - { label: "Descrizione", name: "desc", widget: "text" }
+
+  - name: "contact"
+    label: "7. Contatti"
+    files:
+      - name: "contact"
+        label: "Contatti"
+        file: "src/_data/contact.yaml"
+        fields:
+          - { label: "Testo sopra il titolo", name: "eyebrow", widget: "string" }
+          - { label: "Titolo — riga 1", name: "heading_line1", widget: "string" }
+          - { label: "Titolo — riga 2", name: "heading_line2", widget: "string" }
+          - { label: "Email di contatto", name: "email", widget: "string" }
+          - label: "Parola gigante sullo sfondo"
+            name: "bg_word"
+            widget: "string"
+            hint: "Decorativa, dietro al titolo. Tienila corta (es. hello, ciao)."
+          - label: "Social"
+            name: "socials"
+            widget: "list"
+            summary: "{{name}}"
+            hint: "I social senza link vero non vengono mostrati sul sito."
+            fields:
+              - { label: "Nome piattaforma", name: "name", widget: "string" }
+              - { label: "Link completo (https://...)", name: "url", widget: "string" }
+
+  - name: "footer"
+    label: "8. Footer"
+    files:
+      - name: "footer"
+        label: "Footer"
+        file: "src/_data/footer.yaml"
+        fields:
+          - { label: "Testo copyright", name: "copyright", widget: "string" }
+          - { label: "Testo di stato", name: "status_text", widget: "string" }

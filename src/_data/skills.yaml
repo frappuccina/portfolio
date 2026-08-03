@@ -1,58 +1,49 @@
-label: "Competenze"
-heading_line1: "Cosa"
-heading_line2: "porto"
-heading_highlight: "in tavola."
+label: Competenze
+heading_line1: Cosa
+heading_line2: porto
+heading_highlight: in tavola.
 bars:
-  - name: "UX Research"
-    level: "Advanced"
+  - name: UX Research
+    level: Advanced
     percent: 88
-    color: "green"
-  - name: "Interaction Design"
-    level: "Advanced"
+    color: green
+  - name: Interaction Design
+    level: Advanced
     percent: 85
-    color: "green"
-  - name: "Design Systems"
-    level: "Intermediate+"
+    color: green
+  - name: Design Systems
+    level: Intermediate+
     percent: 72
-    color: "pink"
-  - name: "Accessibility"
-    level: "Intermediate+"
+    color: pink
+  - name: Accessibility
+    level: Intermediate+
     percent: 70
-    color: "pink"
-  - name: "Prototyping"
-    level: "Advanced"
+    color: pink
+  - name: Prototyping
+    level: Advanced
     percent: 90
-    color: "green"
-  - name: "UX Writing"
-    level: "Intermediate"
+    color: green
+  - name: UX Writing
+    level: Intermediate
     percent: 62
-    color: "pink"
-tools_label: "Tool"
-tools_heading_line1: "Il mio"
-tools_heading_line2: "stack."
+    color: pink
+tools_label: Tool
+tools_heading_line1: Il mio
+tools_heading_line2: stack.
 chips:
-  - text: "Figma"
+  - text: Figma
     highlight: true
-  - text: "FigJam"
-    highlight: true
-  - text: "Notion"
+  - highlight: false
+    text: Claude Design
+  - text: Hotjar
     highlight: false
-  - text: "Maze"
+  - text: Jira
     highlight: false
-  - text: "Hotjar"
+  - text: Miro
     highlight: false
-  - text: "Jira"
+  - text: HTML/CSS
     highlight: false
-  - text: "Miro"
-    highlight: false
-  - text: "Zeroheight"
-    highlight: false
-  - text: "HTML/CSS"
-    highlight: false
-  - text: "Analytics"
-    highlight: false
-certs_label: "Formazione & certificazioni"
+certs_label: Formazione & certificazioni
 certs:
-  - "Google UX Design Certificate"
-  - "Interaction Design Foundation"
-
+  - Google UX Design Certificate
+  - Interaction Design Foundation

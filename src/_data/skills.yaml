@@ -33,7 +33,7 @@ tools_heading_line2: stack.
 chips:
   - text: Figma
     highlight: true
-  - highlight: false
+  - highlight: true
     text: Claude Design
   - text: Hotjar
     highlight: false

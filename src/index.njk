@@ -313,57 +313,6 @@
     font-size:5rem; color:rgba(240,236,217,.06); line-height:1;
   }
 
-  /* ── SKILLS ── */
-  #skills { background:var(--cream); color:var(--ink); padding:100px 48px; }
-  .skills-grid { display:grid; grid-template-columns:1fr 1fr; gap:72px; }
-  .skills-heading { font-family:var(--display); font-weight:800;
-    font-size:clamp(2.2rem, 4.5vw, 4rem); line-height:.95; letter-spacing:-.03em;
-    margin-bottom:48px; }
-  .skills-heading .green { color:var(--green); }
-  .skill-bar-list { list-style:none; }
-  .skill-bar { padding:16px 0; border-bottom:1.5px solid rgba(26,26,26,.07); }
-  .skill-bar-top { display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; }
-  .skill-bar-name { font-family:var(--display); font-weight:700; font-size:1.1rem; }
-  .skill-bar-pct { font-size:.7rem; letter-spacing:.12em; text-transform:uppercase; color:#888; }
-  .skill-track { height:3px; background:rgba(26,26,26,.08); border-radius:100px; overflow:hidden; }
-  .skill-fill { height:100%; background:var(--green); border-radius:100px; width:0; transition:width 1.2s cubic-bezier(.23,1,.32,1); }
-  .skill-fill.pink { background:var(--pink); }
-
-  .tools-wrap { }
-  .tools-heading { font-family:var(--display); font-weight:800;
-    font-size:clamp(1.5rem, 3vw, 2.4rem); line-height:1; letter-spacing:-.02em; margin-bottom:36px; }
-  .tools-chips { display:flex; flex-wrap:wrap; gap:10px; margin-bottom:40px; }
-  .chip {
-    padding:10px 20px; border-radius:100px;
-    border:1.5px solid rgba(26,26,26,.12);
-    font-size:.72rem; letter-spacing:.1em; text-transform:uppercase; color:#555;
-    transition:all .3s; background:white;
-  }
-  .chip:hover { background:var(--green); color:var(--cream); border-color:var(--green); transform:translateY(-2px); }
-  .chip.highlight { background:var(--green); color:var(--cream); border-color:var(--green); }
-  .certs-box { padding:32px; border:1.5px solid rgba(26,26,26,.09); border-radius:8px; }
-  .certs-label { font-size:.65rem; letter-spacing:.15em; text-transform:uppercase; color:#aaa; margin-bottom:14px; }
-  .cert-item { font-family:var(--display); font-weight:600; font-size:.95rem;
-    padding:10px 0; border-bottom:1px solid rgba(26,26,26,.06); color:var(--ink); }
-  .cert-item:last-child { border:none; padding-bottom:0; }
-
-  /* ── PROCESS ── */
-  #process { padding:100px 48px; background:var(--green); }
-  .process-row { display:grid; grid-template-columns:repeat(4,1fr); gap:2px; margin-top:64px; }
-  .p-step { padding:44px 32px; background:rgba(240,236,217,.05);
-    border:1px solid rgba(240,236,217,.07);
-    position:relative; overflow:hidden;
-    transition:background .4s; }
-  .p-step:hover { background:rgba(240,236,217,.1); }
-  .p-num { font-family:var(--display); font-weight:800; font-size:3.5rem;
-    color:rgba(240,236,217,.06); line-height:1; margin-bottom:28px; transition:color .4s; }
-  .p-step:hover .p-num { color:var(--pink); }
-  .p-title { font-family:var(--display); font-weight:700; font-size:1.2rem; margin-bottom:12px; }
-  .p-desc { font-size:.82rem; line-height:1.72; color:rgba(240,236,217,.5); }
-  .p-line { position:absolute; bottom:0; left:0; width:0; height:3px;
-    background:var(--pink); transition:width .5s cubic-bezier(.23,1,.32,1); }
-  .p-step:hover .p-line { width:100%; }
-
   /* ── CONTACT ── */
   #contact { padding:140px 48px 100px; background:var(--pink); color:var(--ink); text-align:center; position:relative; overflow:hidden; }
   .contact-bg-text {
@@ -444,10 +393,6 @@
     .case-feat-inner{grid-template-columns:1fr;}
     .case-feat-visual{min-height:200px;}
     .case-row{grid-template-columns:60px 1fr auto;}
-    #skills{padding:72px 24px;}
-    .skills-grid{grid-template-columns:1fr;}
-    #process{padding:72px 24px;}
-    .process-row{grid-template-columns:1fr 1fr;}
     #contact{padding:100px 24px 80px;}
     footer{padding:20px 24px;flex-direction:column;gap:10px;text-align:center;}
   }
@@ -493,8 +438,6 @@
     .c-soc{padding:10px 0;}
 
     #about{padding:64px 20px;}
-    #skills{padding:64px 20px;}
-    #process{padding:64px 20px;}
     #contact{padding:88px 20px 72px;}
   }
 
@@ -520,7 +463,6 @@
   <ul class="nav-links">
     <li><a href="#about">{{ site.nav_about }}</a></li>
     <li><a href="#work">{{ site.nav_work }}</a></li>
-    <li><a href="#skills">{{ site.nav_skills }}</a></li>
     <li><a href="#contact">{{ site.nav_contact }}</a></li>
   </ul>
 </nav>
@@ -643,55 +585,6 @@
   </div>
 </section>
 
-<!-- SKILLS -->
-<section id="skills">
-  <div class="skills-grid">
-    <div>
-      <p class="sec-label" data-n="03" style="color:#aaa">{{ skills.label }}</p>
-      <h2 class="skills-heading rv">{{ skills.heading_line1 }}<br>{{ skills.heading_line2 }}<br><span class="green">{{ skills.heading_highlight }}</span></h2>
-      <ul class="skill-bar-list">
-        {% for bar in skills.bars %}
-        <li class="skill-bar rv d1">
-          <div class="skill-bar-top"><span class="skill-bar-name">{{ bar.name }}</span><span class="skill-bar-pct">{{ bar.level }}</span></div>
-          <div class="skill-track"><div class="skill-fill{% if bar.color == 'pink' %} pink{% endif %}" data-w="{{ bar.percent }}"></div></div>
-        </li>
-        {% endfor %}
-      </ul>
-    </div>
-    <div class="tools-wrap rv d2">
-      <p class="sec-label" data-n="" style="color:#aaa">{{ skills.tools_label }}</p>
-      <h3 class="tools-heading">{{ skills.tools_heading_line1 }}<br>{{ skills.tools_heading_line2 }}</h3>
-      <div class="tools-chips">
-        {% for chip in skills.chips %}
-        <span class="chip{% if chip.highlight %} highlight{% endif %}">{{ chip.text }}</span>
-        {% endfor %}
-      </div>
-      <div class="certs-box rv d3">
-        <p class="certs-label">{{ skills.certs_label }}</p>
-        {% for cert in skills.certs %}
-        <div class="cert-item">{{ cert }}</div>
-        {% endfor %}
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- PROCESS -->
-<section id="process">
-  <p class="sec-label" data-n="04" style="color:rgba(240,236,217,.4)">{{ process.label }}</p>
-  <h2 class="work-title rv" style="max-width:600px">{{ process.title }} <span style="color:var(--pink)">{{ process.title_highlight }}</span></h2>
-  <div class="process-row">
-    {% for step in process.steps %}
-    <div class="p-step rv{% if loop.index0 > 0 %} d{{ loop.index0 }}{% endif %}">
-      <div class="p-num">{{ step.num }}</div>
-      <h3 class="p-title">{{ step.title }}</h3>
-      <p class="p-desc">{{ step.desc }}</p>
-      <div class="p-line"></div>
-    </div>
-    {% endfor %}
-  </div>
-</section>
-
 <!-- CONTACT -->
 <section id="contact">
   <div class="contact-bg-text" aria-hidden="true">{{ contact.bg_word }}</div>
@@ -729,7 +622,7 @@ document.addEventListener('mousemove',e=>{
   ring.style.left=rx+'px'; ring.style.top=ry+'px';
   requestAnimationFrame(animR);
 })();
-document.querySelectorAll('a,button,.case-row,.p-step,.chip,.skill-bar,.case-featured').forEach(el=>{
+document.querySelectorAll('a,button,.case-row,.case-featured').forEach(el=>{
   el.addEventListener('mouseenter',()=>{ cur.classList.add('big'); ring.style.opacity='.12'; });
   el.addEventListener('mouseleave',()=>{ cur.classList.remove('big'); ring.style.opacity='.4'; });
 });
@@ -739,18 +632,6 @@ const io=new IntersectionObserver(entries=>{
   entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
 },{threshold:.08});
 document.querySelectorAll('.rv').forEach(el=>io.observe(el));
-
-// SKILL BARS
-const barIO=new IntersectionObserver(entries=>{
-  entries.forEach(e=>{
-    if(e.isIntersecting){
-      const fill=e.target.querySelector('.skill-fill');
-      if(fill) fill.style.width=fill.dataset.w+'%';
-      barIO.unobserve(e.target);
-    }
-  });
-},{threshold:.3});
-document.querySelectorAll('.skill-bar').forEach(el=>barIO.observe(el));
 
 // NAV
 const nav=document.getElementById('nav');

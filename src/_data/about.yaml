@@ -8,23 +8,8 @@ paragraphs:
     approccio unisce rigore metodologico e sensibilità estetica: ogni decisione
     nasce da dati"
   - ogni pixel porta intenzione.
-  - Sto costruendo questo portfolio per il mio prossimo step verso il ruolo
-    senior — dove voglio guidare progetti end-to-end e contribuire alla cultura
-    del design.
 cta_primary_text: Guarda i progetti
-cta_secondary_text: Scrivimi
+cta_secondary_text: Scrivimi!
 photo: /images/uploads/profile-picture-white-bg.png
 image_tag: Questa sono io!
-stats:
-  - number: "4"
-    suffix: ""
-    label: "anni di esperienza "
-  - number: "20"
-    suffix: +
-    label: Progetti
-  - number: "5"
-    suffix: ""
-    label: Team
-  - number: WCAG
-    suffix: " AA"
-    label: Compliance
+stats: []

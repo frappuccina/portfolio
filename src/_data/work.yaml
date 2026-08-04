@@ -4,17 +4,18 @@ title_line2: selezionati
 all_link_text: Tutti i progetti
 all_link_url: "#"
 featured:
-  tag: UX Design · UI Design
-  title: 2023 - Redesign del sito Carnevale di Viareggio
+  tag: UX Design · UI Design - 2023
+  title: Redesign del sito Carnevale di Viareggio
   desc: Rivisitazione dell' architettura informativa e redesign completo del sito.
   cta_text: Apri case study
   url: "#"
   image: /images/uploads/frame-122.png
 items:
-  - tag: UX Design · UI Design
+  - tag: UX Design · UI Design · Design System
     title: Redesign del sito Biesse
-    desc: Rivisitazione dell' architettura informativa e redesign completo del sito.
-    year: "2023"
+    desc: Rivisitazione dell' architettura informativa e redesign completo del sito,
+      con implementazione di un nuovo design system.
+    year: "2024"
     url: "#"
     image: ""
   - tag: Design System

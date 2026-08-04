@@ -4,20 +4,19 @@ title_line2: selezionati
 all_link_text: Tutti i progetti
 all_link_url: "#"
 featured:
-  tag: SaaS · B2B · 2026
-  title: "Cassetto del Cittadino - "
-  desc: Ridisegnato il core workflow di una dashboard B2B per ridurre il cognitive
-    load e aumentare l'adozione. +40% task completion rate.
+  tag: UX Design · UI Design
+  title: 2023 - Redesign del sito Carnevale di Viareggio
+  desc: Rivisitazione dell' architettura informativa e redesign completo del sito.
   cta_text: Apri case study
   url: "#"
-  image: ""
+  image: /images/uploads/frame-122.png
 items:
   - tag: UX Design · UI Design
-    title: Redesign del sito Carnevale di Viareggio
+    title: Redesign del sito Biesse
     desc: Rivisitazione dell' architettura informativa e redesign completo del sito.
     year: "2023"
     url: "#"
-    image: /images/uploads/frame-122.png
+    image: ""
   - tag: Design System
     title: Sistema di componenti scalabile — Atomic Design
     desc: Design system con 80+ componenti, tokens e documentazione Zeroheight.

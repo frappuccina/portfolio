@@ -1,31 +1,32 @@
-label: "Case Studies"
-title_line1: "Progetti"
-title_line2: "selezionati"
-all_link_text: "Tutti i progetti"
+label: Casi Studio
+title_line1: Progetti
+title_line2: selezionati
+all_link_text: Tutti i progetti
 all_link_url: "#"
 featured:
-  tag: "SaaS · B2B · 2024"
-  title: "Dashboard Analytics — Redesign del flusso principale"
-  desc: "Ridisegnato il core workflow di una dashboard B2B per ridurre il cognitive load e aumentare l'adozione. +40% task completion rate."
-  cta_text: "Apri case study"
+  tag: SaaS · B2B · 2026
+  title: "Cassetto del Cittadino - "
+  desc: Ridisegnato il core workflow di una dashboard B2B per ridurre il cognitive
+    load e aumentare l'adozione. +40% task completion rate.
+  cta_text: Apri case study
   url: "#"
   image: ""
 items:
-  - tag: "Mobile · B2C"
-    title: "App Onboarding — Zero to Hero UX"
-    desc: "Flusso di onboarding da 12 schermate a 5, con +60% completion."
-    year: "2024"
+  - tag: UX Design · UI Design
+    title: Redesign del sito Carnevale di Viareggio
+    desc: Rivisitazione dell' architettura informativa e redesign completo del sito.
+    year: "2023"
     url: "#"
-    image: ""
-  - tag: "Design System"
-    title: "Sistema di componenti scalabile — Atomic Design"
-    desc: "Design system con 80+ componenti, tokens e documentazione Zeroheight."
+    image: /images/uploads/frame-122.png
+  - tag: Design System
+    title: Sistema di componenti scalabile — Atomic Design
+    desc: Design system con 80+ componenti, tokens e documentazione Zeroheight.
     year: "2023"
     url: "#"
     image: ""
-  - tag: "E-commerce · B2C"
-    title: "Checkout Redesign — Riduzione del drop-off"
-    desc: "Ottimizzazione del funnel di acquisto con test A/B e analisi Hotjar."
+  - tag: E-commerce · B2C
+    title: Checkout Redesign — Riduzione del drop-off
+    desc: Ottimizzazione del funnel di acquisto con test A/B e analisi Hotjar.
     year: "2023"
     url: "#"
     image: ""

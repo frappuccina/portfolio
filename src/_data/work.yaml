@@ -19,14 +19,14 @@ items:
     url: "#"
     image: ""
   - tag: Design System
-    title: Sistema di componenti scalabile — Atomic Design
-    desc: Design system con 80+ componenti, tokens e documentazione Zeroheight.
-    year: "2023"
+    title: Lorem Ipsum
+    desc: Lorem
+    year: "2025"
     url: "#"
     image: ""
   - tag: E-commerce · B2C
-    title: Checkout Redesign — Riduzione del drop-off
+    title: Lorem ipsum
     desc: Ottimizzazione del funnel di acquisto con test A/B e analisi Hotjar.
-    year: "2023"
+    year: "2026"
     url: "#"
     image: ""

@@ -6,10 +6,11 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy("src/images");
 
   return {
-    templateFormats: ["njk"],
+    templateFormats: ["njk", "md"],
     dir: {
       input: "src",
       output: "_site",
+      includes: "_includes",
     },
   };
 };

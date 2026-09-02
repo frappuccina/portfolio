@@ -1,0 +1,49 @@
+label: Competenze
+heading_line1: Cosa
+heading_line2: porto
+heading_highlight: in tavola.
+bars:
+  - name: UX Research
+    level: Advanced
+    percent: 88
+    color: green
+  - name: Interaction Design
+    level: Advanced
+    percent: 85
+    color: green
+  - name: Design Systems
+    level: Intermediate+
+    percent: 72
+    color: pink
+  - name: Accessibility
+    level: Intermediate+
+    percent: 70
+    color: pink
+  - name: Prototyping
+    level: Advanced
+    percent: 90
+    color: green
+  - name: UX Writing
+    level: Intermediate
+    percent: 62
+    color: pink
+tools_label: Tool
+tools_heading_line1: Il mio
+tools_heading_line2: stack.
+chips:
+  - text: Figma
+    highlight: true
+  - highlight: true
+    text: Claude Design
+  - text: Hotjar
+    highlight: false
+  - text: Jira
+    highlight: false
+  - text: Miro
+    highlight: false
+  - text: HTML/CSS
+    highlight: false
+certs_label: Formazione & certificazioni
+certs:
+  - Google UX Design Certificate
+  - Interaction Design Foundation

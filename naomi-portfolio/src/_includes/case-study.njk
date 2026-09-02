@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{ title }} — Case Study · {{ site.logo }}</title>
+<meta name="description" content="{{ subtitle }}">
+<link rel="canonical" href="{{ site.url }}{{ page.url }}">
+
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="{{ site.title }}">
+<meta property="og:title" content="{{ title }} — Case Study">
+<meta property="og:description" content="{{ subtitle }}">
+<meta property="og:url" content="{{ site.url }}{{ page.url }}">
+<meta property="og:locale" content="it_IT">
+
+<meta name="theme-color" content="#1A1A1A">
+{% if site.favicon %}<link rel="icon" href="{{ site.favicon }}">
+{% else %}<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%232A6E3F'/><text x='50' y='50' dy='.36em' text-anchor='middle' font-size='62' fill='%23E87DB0' font-family='sans-serif'>&#10022;</text></svg>">
+{% endif %}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,700;12..96,800&family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&family=DM+Mono:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+<style>
+/* ─── TOKENS ─── */
+:root {
+  --green:  #2A6E3F;
+  --cream:  #F0ECD9;
+  --pink:   #E87DB0;
+  --ink:    #1A1A1A;
+  --ink-60: rgba(26,26,26,.6);
+  --ink-20: rgba(26,26,26,.12);
+  --display:'Bricolage Grotesque',sans-serif;
+  --serif:  'DM Serif Display',serif;
+  --body:   'DM Sans',sans-serif;
+  --mono:   'DM Mono',monospace;
+  --sidebar-w: 280px;
+}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{
+  font-family:var(--body);
+  background:var(--cream);
+  color:var(--ink);
+  cursor:none;
+  overflow-x:hidden;
+}
+
+/* ─── CURSOR ─── */
+#cur{width:10px;height:10px;background:var(--pink);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width .2s,height .2s;}
+#cur.big{width:40px;height:40px;opacity:.2;}
+#ring{width:34px;height:34px;border:1px solid var(--ink);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);opacity:.25;}
+
+/* ─── TOP NAV ─── */
+.topnav{
+  position:fixed;top:0;left:0;right:0;z-index:200;
+  height:52px;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 32px;
+  background:rgba(26,26,26,.95);
+  backdrop-filter:blur(16px);
+  border-bottom:1px solid rgba(240,236,217,.07);
+}
+.topnav-logo{
+  font-family:var(--display);font-weight:800;font-size:.9rem;
+  color:var(--cream);text-decoration:none;cursor:none;
+  letter-spacing:-.01em;
+}
+.topnav-back{
+  display:flex;align-items:center;gap:8px;
+  font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;
+  color:rgba(240,236,217,.5);text-decoration:none;cursor:none;
+  transition:color .2s;
+}
+.topnav-back:hover{color:var(--cream);}
+.topnav-back svg{width:14px;}
+.topnav-cs-title{
+  font-size:.72rem;letter-spacing:.06em;
+  color:rgba(240,236,217,.35);
+  font-family:var(--display);
+  max-width:320px;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+}
+
+/* ─── LAYOUT ─── */
+.layout{
+  display:flex;
+  min-height:100vh;
+  padding-top:52px;
+}
+
+/* ─── SIDEBAR ─── */
+.sidebar{
+  width:var(--sidebar-w);
+  flex-shrink:0;
+  position:sticky;
+  top:52px;
+  height:calc(100vh - 52px);
+  overflow-y:auto;
+  background:var(--ink);
+  color:var(--cream);
+  display:flex;
+  flex-direction:column;
+  padding:36px 0 40px;
+  border-right:1px solid rgba(240,236,217,.06);
+}
+.sidebar::-webkit-scrollbar{width:3px;}
+.sidebar::-webkit-scrollbar-thumb{background:rgba(240,236,217,.1);border-radius:10px;}
+
+.sb-meta{padding:0 28px 28px;}
+.sb-tag{
+  display:inline-flex;align-items:center;gap:6px;
+  font-size:.6rem;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--pink);margin-bottom:16px;
+}
+.sb-tag::before{content:'';width:14px;height:1px;background:var(--pink);}
+.sb-project-title{
+  font-family:var(--display);font-weight:800;
+  font-size:1.05rem;line-height:1.2;letter-spacing:-.02em;
+  color:var(--cream);margin-bottom:20px;
+}
+.sb-info-row{
+  display:flex;flex-direction:column;gap:1px;
+  margin-bottom:8px;
+}
+.sb-info-label{
+  font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;
+  color:rgba(240,236,217,.3);margin-bottom:2px;
+}
+.sb-info-value{
+  font-size:.78rem;color:rgba(240,236,217,.65);
+  line-height:1.4;
+}
+
+.sb-divider{height:1px;background:rgba(240,236,217,.07);margin:0 28px 20px;}
+
+.sb-nav-label{
+  font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;
+  color:rgba(240,236,217,.25);padding:0 28px;margin-bottom:8px;
+}
+.sb-nav{list-style:none;}
+.sb-nav-item a{
+  display:flex;align-items:center;gap:10px;
+  padding:9px 28px;
+  font-size:.78rem;color:rgba(240,236,217,.4);
+  text-decoration:none;cursor:none;
+  transition:color .2s,background .2s;
+  border-left:2px solid transparent;
+  line-height:1.3;
+}
+.sb-nav-item a:hover{color:rgba(240,236,217,.8);background:rgba(240,236,217,.03);}
+.sb-nav-item a.active{
+  color:var(--cream);
+  border-left-color:var(--pink);
+  background:rgba(232,125,176,.07);
+}
+.sb-nav-item a .nav-dot{
+  width:5px;height:5px;border-radius:50%;
+  background:rgba(240,236,217,.2);flex-shrink:0;
+  transition:background .2s;
+}
+.sb-nav-item a.active .nav-dot{background:var(--pink);}
+
+.sb-progress{
+  margin:auto 28px 0;
+  padding-top:28px;
+  border-top:1px solid rgba(240,236,217,.07);
+}
+.sb-progress-label{
+  display:flex;justify-content:space-between;
+  font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;
+  color:rgba(240,236,217,.3);margin-bottom:8px;
+}
+.sb-progress-track{height:2px;background:rgba(240,236,217,.08);border-radius:2px;overflow:hidden;}
+.sb-progress-fill{height:100%;background:var(--pink);border-radius:2px;width:0%;transition:width .3s ease;}
+
+.content{flex:1;min-width:0;}
+
+/* ─── HERO BAND ─── */
+.cs-hero{
+  background:var(--green);
+  padding:64px 72px 0;
+  position:relative;overflow:hidden;
+}
+.cs-hero::after{
+  content:'';position:absolute;bottom:0;left:0;right:0;height:60px;
+  background:linear-gradient(to bottom,transparent,var(--cream));
+  pointer-events:none;
+}
+.cs-hero-tag{
+  font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--pink);margin-bottom:20px;
+  display:flex;align-items:center;gap:10px;
+}
+.cs-hero-tag::before{content:'';width:20px;height:1px;background:var(--pink);}
+.cs-hero-title{
+  font-family:var(--display);font-weight:800;
+  font-size:clamp(2.2rem,5vw,4.5rem);
+  line-height:.9;letter-spacing:-.04em;
+  color:var(--cream);margin-bottom:24px;
+}
+.cs-hero-title .pk{color:var(--pink);}
+.cs-hero-sub{
+  font-size:1rem;line-height:1.75;
+  color:rgba(240,236,217,.65);
+  max-width:580px;margin-bottom:48px;
+}
+.hero-img{
+  width:100%;
+  min-height:360px;
+  background:rgba(240,236,217,.06);
+  border-radius:8px 8px 0 0;
+  border:1px solid rgba(240,236,217,.08);
+  border-bottom:none;
+  background-size:cover;background-position:center;
+  display:flex;align-items:center;justify-content:center;
+  font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;
+  color:rgba(240,236,217,.25);text-align:center;padding:40px;
+  position:relative;z-index:1;
+}
+
+/* ─── SHARED SECTION STYLES ─── */
+.cs-section{padding:80px 72px;border-bottom:1px solid var(--ink-20);scroll-margin-top:72px;}
+.cs-section:last-child{border-bottom:none;}
+.section-eyebrow{
+  font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--pink);margin-bottom:12px;
+  display:flex;align-items:center;gap:10px;
+}
+.section-eyebrow::after{content:'';flex:1;max-width:40px;height:1px;background:var(--pink);}
+.section-heading{
+  font-family:var(--display);font-weight:800;
+  font-size:clamp(1.6rem,3.5vw,2.8rem);
+  line-height:.95;letter-spacing:-.03em;
+  margin-bottom:28px;
+}
+.section-heading .gn{color:var(--green);}
+.section-heading .pk{color:var(--pink);}
+.body-text{font-size:.97rem;line-height:1.82;color:var(--ink-60);max-width:660px;margin-bottom:20px;}
+.body-text strong{color:var(--ink);font-weight:500;}
+.body-text em{font-style:italic;color:var(--green);}
+.italic-callout{
+  font-family:var(--serif);font-style:italic;
+  font-size:1.1rem;line-height:1.6;
+  color:var(--ink-60);max-width:580px;
+  padding:24px 0;
+  border-top:1px solid var(--ink-20);
+  border-bottom:1px solid var(--ink-20);
+  margin:24px 0;
+}
+
+/* ─── OVERVIEW META GRID ─── */
+.overview-grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:0;
+  border:1px solid var(--ink-20);border-radius:8px;
+  overflow:hidden;margin-top:40px;
+}
+.ov-cell{padding:24px 28px;border-right:1px solid var(--ink-20);border-bottom:1px solid var(--ink-20);}
+.ov-cell:nth-child(2n){border-right:none;}
+.ov-cell:nth-last-child(-n+2){border-bottom:none;}
+.ov-label{font-size:.6rem;letter-spacing:.16em;text-transform:uppercase;color:rgba(26,26,26,.35);margin-bottom:6px;}
+.ov-value{font-family:var(--display);font-weight:700;font-size:.95rem;color:var(--ink);line-height:1.35;}
+.ov-value small{font-weight:400;font-size:.85rem;color:var(--ink-60);display:block;}
+
+/* ─── IMG PLACEHOLDER ─── */
+.img-ph{
+  width:100%;background:rgba(26,26,26,.04);
+  border:1px solid var(--ink-20);border-radius:6px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:.65rem;letter-spacing:.12em;text-transform:uppercase;
+  color:rgba(26,26,26,.25);text-align:center;padding:32px;
+  font-family:var(--mono);
+  background-size:cover;background-position:center;
+}
+.img-ph-tall{min-height:320px;}
+.img-ph-short{min-height:200px;}
+.img-ph-wide{min-height:280px;}
+.img-caption{font-size:.75rem;color:var(--ink-60);margin-top:10px;font-family:var(--mono);display:flex;align-items:center;gap:6px;}
+.img-caption::before{content:'↑';color:var(--pink);}
+
+/* ─── PROBLEM ─── */
+#problema{background:var(--cream);}
+.problem-statement{
+  font-family:var(--display);font-weight:800;
+  font-size:clamp(1.3rem,2.5vw,1.9rem);
+  line-height:1.15;letter-spacing:-.02em;
+  color:var(--ink);max-width:640px;
+  padding:32px;
+  background:rgba(26,26,26,.03);
+  border-left:3px solid var(--pink);
+  border-radius:0 6px 6px 0;
+  margin:24px 0 36px;
+}
+.pain-list{list-style:none;display:flex;flex-direction:column;gap:2px;margin:24px 0;}
+.pain-item{
+  display:grid;grid-template-columns:48px 1fr;gap:20px;align-items:start;padding:20px;
+  background:rgba(26,26,26,.025);border:1px solid var(--ink-20);border-radius:4px;
+  transition:border-color .3s,background .3s;
+}
+.pain-item:hover{border-color:rgba(232,125,176,.3);background:rgba(232,125,176,.03);}
+.pain-num{font-family:var(--display);font-weight:800;font-size:1.4rem;color:rgba(26,26,26,.1);line-height:1;transition:color .3s;}
+.pain-item:hover .pain-num{color:var(--pink);}
+.pain-title{font-family:var(--display);font-weight:700;font-size:.92rem;margin-bottom:4px;}
+.pain-desc{font-size:.82rem;line-height:1.65;color:var(--ink-60);}
+
+/* ─── 2-COL LAYOUT ─── */
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:40px;margin:32px 0;align-items:start;}
+.two-col.asymm{grid-template-columns:1fr 1.4fr;}
+
+/* ─── RESEARCH ─── */
+#research{background:rgba(26,26,26,.02);}
+.insight-cards{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:28px 0;}
+.insight-card{padding:24px;border:1px solid var(--ink-20);border-radius:6px;background:white;transition:border-color .3s,transform .3s;}
+.insight-card:hover{border-color:var(--green);transform:translateY(-2px);}
+.insight-icon{font-size:1.4rem;margin-bottom:10px;}
+.insight-label{font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:var(--green);margin-bottom:6px;font-weight:500;}
+.insight-text{font-size:.85rem;line-height:1.65;color:var(--ink-60);}
+.insight-text strong{color:var(--ink);}
+.quote-block{margin:32px 0;padding:32px 36px;background:var(--green);border-radius:6px;position:relative;}
+.quote-block::before{content:'"';position:absolute;top:-16px;left:28px;font-family:var(--serif);font-size:5rem;color:var(--pink);line-height:1;}
+.quote-text{font-family:var(--serif);font-style:italic;font-size:1.15rem;line-height:1.6;color:var(--cream);margin-bottom:12px;}
+.quote-source{font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(240,236,217,.45);}
+
+/* ─── APPROACH / HMW ─── */
+#approccio{background:var(--cream);}
+.hmw{
+  font-family:var(--display);font-weight:800;
+  font-size:clamp(1.4rem,3vw,2.2rem);
+  line-height:1.1;letter-spacing:-.03em;
+  color:var(--green);padding:36px;
+  background:rgba(42,110,63,.06);border-radius:6px;margin:28px 0;
+}
+.hmw span{color:var(--pink);}
+.principle-list{list-style:none;display:flex;flex-direction:column;gap:2px;margin-top:24px;}
+.principle-item{display:grid;grid-template-columns:200px 1fr;gap:0;border:1px solid var(--ink-20);border-radius:4px;overflow:hidden;}
+.principle-num{padding:28px 24px;background:var(--ink);font-family:var(--display);font-weight:800;font-size:2rem;color:rgba(240,236,217,.08);display:flex;align-items:center;line-height:1;}
+.principle-body{padding:24px 28px;}
+.principle-title{font-family:var(--display);font-weight:700;font-size:1rem;margin-bottom:6px;color:var(--ink);}
+.principle-desc{font-size:.83rem;line-height:1.65;color:var(--ink-60);}
+
+/* ─── FINAL DESIGN ─── */
+#final{background:var(--green);color:var(--cream);}
+#final .section-eyebrow{color:var(--pink);}
+#final .section-heading{color:var(--cream);}
+#final .body-text{color:rgba(240,236,217,.65);}
+#final .body-text strong{color:var(--cream);}
+.design-feature{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;padding:48px 0;border-bottom:1px solid rgba(240,236,217,.08);}
+.design-feature:last-child{border-bottom:none;}
+.design-feature.reverse{direction:rtl;}
+.design-feature.reverse > *{direction:ltr;}
+.feat-img{border-radius:6px;overflow:hidden;background:rgba(240,236,217,.06);border:1px solid rgba(240,236,217,.08);}
+.feat-img .img-ph{background:rgba(240,236,217,.04);border-color:rgba(240,236,217,.08);color:rgba(240,236,217,.2);min-height:280px;}
+.feat-label{font-size:.6rem;letter-spacing:.16em;text-transform:uppercase;color:var(--pink);margin-bottom:12px;}
+.feat-title{font-family:var(--display);font-weight:800;font-size:clamp(1.3rem,2.5vw,2rem);line-height:1.05;letter-spacing:-.03em;color:var(--cream);margin-bottom:14px;}
+.feat-body{font-size:.88rem;line-height:1.75;color:rgba(240,236,217,.6);}
+.feat-body strong{color:var(--cream);}
+
+/* ─── RESULTS ─── */
+#risultati{background:var(--cream);}
+.results-metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin:36px 0;border:1px solid var(--ink-20);border-radius:6px;overflow:hidden;}
+.res-metric{padding:32px 28px;background:white;text-align:center;border-right:1px solid var(--ink-20);transition:background .3s;}
+.res-metric:last-child{border-right:none;}
+.res-metric:hover{background:rgba(42,110,63,.04);}
+.res-n{font-family:var(--display);font-weight:800;font-size:clamp(2rem,4vw,3.2rem);line-height:1;margin-bottom:6px;color:var(--green);}
+.res-n .suffix{color:var(--pink);}
+.res-l{font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-60);}
+.qual-results{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:24px;}
+.qual-item{padding:20px 24px;background:rgba(42,110,63,.06);border:1px solid rgba(42,110,63,.12);border-radius:6px;display:flex;gap:14px;align-items:start;}
+.qual-icon{font-size:1.1rem;flex-shrink:0;margin-top:1px;}
+.qual-body{font-size:.84rem;line-height:1.6;color:var(--ink-60);}
+.qual-body strong{color:var(--ink);}
+
+/* ─── LEARNINGS ─── */
+#learnings{background:rgba(26,26,26,.02);}
+.learning-row{display:grid;grid-template-columns:60px 1fr;gap:20px;padding:24px 0;border-bottom:1px solid var(--ink-20);align-items:start;}
+.learning-row:last-child{border-bottom:none;}
+.learning-icon{font-size:1.5rem;}
+.learning-title{font-family:var(--display);font-weight:700;font-size:.92rem;margin-bottom:5px;}
+.learning-body{font-size:.83rem;line-height:1.65;color:var(--ink-60);}
+.learning-body strong{color:var(--ink);}
+
+/* ─── CS FOOTER ─── */
+.cs-footer{padding:48px 72px;background:var(--ink);display:flex;justify-content:space-between;align-items:center;border-top:1px solid rgba(240,236,217,.07);gap:24px;}
+.cs-footer-prev,.cs-footer-next{display:flex;flex-direction:column;gap:4px;text-decoration:none;cursor:none;transition:opacity .2s;min-width:0;}
+.cs-footer-prev:hover,.cs-footer-next:hover{opacity:.7;}
+.cs-footer-dir{font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(240,236,217,.3);margin-bottom:2px;}
+.cs-footer-title{font-family:var(--display);font-weight:700;font-size:.95rem;color:var(--cream);}
+.cs-footer-next{text-align:right;}
+.cs-footer-cta{display:flex;align-items:center;gap:10px;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--cream);background:rgba(240,236,217,.08);padding:12px 24px;border-radius:100px;text-decoration:none;cursor:none;transition:background .3s;flex-shrink:0;}
+.cs-footer-cta:hover{background:var(--pink);}
+
+/* ─── SCROLL REVEAL ─── */
+.rv{opacity:0;transform:translateY(28px);transition:opacity .8s cubic-bezier(.23,1,.32,1),transform .8s cubic-bezier(.23,1,.32,1);}
+.rv.in{opacity:1;transform:none;}
+.d1{transition-delay:.1s;}.d2{transition-delay:.2s;}.d3{transition-delay:.32s;}
+
+/* ─── RESPONSIVE ─── */
+@media(max-width:1024px){ .sidebar{width:240px;} }
+@media(max-width:768px){
+  :root{--sidebar-w:0px;}
+  .sidebar{display:none;}
+  .cs-section{padding:56px 24px;}
+  .cs-hero{padding:48px 24px 0;}
+  .two-col,.two-col.asymm{grid-template-columns:1fr;}
+  .insight-cards,.qual-results{grid-template-columns:1fr;}
+  .results-metrics{grid-template-columns:1fr;}
+  .design-feature{grid-template-columns:1fr;}
+  .principle-item{grid-template-columns:1fr;}
+  .principle-num{display:none;}
+  .overview-grid{grid-template-columns:1fr;}
+  .ov-cell{border-right:none;}
+  .ov-cell:nth-last-child(-n+2){border-bottom:1px solid var(--ink-20);}
+  .ov-cell:last-child{border-bottom:none;}
+  .cs-footer{flex-direction:column;gap:24px;padding:40px 24px;text-align:center;}
+  .topnav{padding:0 20px;}
+  .cs-footer-next{text-align:center;}
+  .topnav-cs-title{display:none;}
+}
+
+/* Dispositivi touch: niente cursore finto */
+@media (hover:none), (pointer:coarse) {
+  #cur, #ring { display:none; }
+  body { cursor:auto; }
+  a, .pain-item, .insight-card, .res-metric { cursor:pointer; }
+}
+</style>
+</head>
+<body>
+
+<div id="cur"></div>
+<div id="ring"></div>
+
+<!-- TOP NAV -->
+<header class="topnav">
+  <a href="/#work" class="topnav-back">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M19 12H5M5 12l7 7M5 12l7-7"/></svg>
+    Portfolio
+  </a>
+  <span class="topnav-cs-title">{{ title }}</span>
+  <a href="/" class="topnav-logo">{{ site.logo }}</a>
+</header>
+
+<div class="layout">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sb-meta">
+      <div class="sb-tag">{{ tag }}</div>
+      <div class="sb-project-title">{{ title }}</div>
+
+      <div class="sb-info-row">
+        <div class="sb-info-label">Ruolo</div>
+        <div class="sb-info-value">{{ role }}</div>
+      </div>
+      <div class="sb-info-row">
+        <div class="sb-info-label">Anno</div>
+        <div class="sb-info-value">{{ year }}</div>
+      </div>
+      {% if duration %}<div class="sb-info-row">
+        <div class="sb-info-label">Durata</div>
+        <div class="sb-info-value">{{ duration }}</div>
+      </div>{% endif %}
+      {% if platform %}<div class="sb-info-row">
+        <div class="sb-info-label">Platform</div>
+        <div class="sb-info-value">{{ platform }}</div>
+      </div>{% endif %}
+    </div>
+
+    <div class="sb-divider"></div>
+
+    <div class="sb-nav-label">Contenuto</div>
+    <ul class="sb-nav" id="sidebarNav">
+      <li class="sb-nav-item"><a href="#overview" class="active"><span class="nav-dot"></span>Overview</a></li>
+      <li class="sb-nav-item"><a href="#problema"><span class="nav-dot"></span>Il problema</a></li>
+      <li class="sb-nav-item"><a href="#research"><span class="nav-dot"></span>Research</a></li>
+      <li class="sb-nav-item"><a href="#approccio"><span class="nav-dot"></span>Approccio &amp; HMW</a></li>
+      <li class="sb-nav-item"><a href="#final"><span class="nav-dot"></span>Final design</a></li>
+      <li class="sb-nav-item"><a href="#risultati"><span class="nav-dot"></span>Risultati</a></li>
+      <li class="sb-nav-item"><a href="#learnings"><span class="nav-dot"></span>Learnings</a></li>
+    </ul>
+
+    <div class="sb-progress">
+      <div class="sb-progress-label">
+        <span>Progresso lettura</span>
+        <span id="progressPct">0%</span>
+      </div>
+      <div class="sb-progress-track">
+        <div class="sb-progress-fill" id="progressFill"></div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="content">
+
+    <!-- HERO -->
+    <div class="cs-hero">
+      <p class="cs-hero-tag">Case Study{% if nav_number %} · {{ nav_number }}{% endif %}</p>
+      <h1 class="cs-hero-title">{{ hero_title_line1 }}{% if hero_title_line2 %}<br><span class="pk">{{ hero_title_line2 }}</span>{% endif %}</h1>
+      <p class="cs-hero-sub">{{ subtitle }}</p>
+      <div class="hero-img"{% if cover_image %} style="background-image:url('{{ cover_image }}');"{% endif %}>{% if not cover_image %}→ Aggiungi qui uno screenshot / mockup del progetto finale<br><br>Formato consigliato: 1440×810px · PNG o WebP{% endif %}</div>
+    </div>
+
+    <!-- OVERVIEW -->
+    <section class="cs-section" id="overview">
+      <p class="section-eyebrow">Overview</p>
+      <h2 class="section-heading rv">{{ overview.heading_pre }} <span class="gn">{{ overview.heading_hl }}</span></h2>
+      {% for p in overview.paragraphs %}
+      <p class="body-text rv d1">{{ p | safe }}</p>
+      {% endfor %}
+
+      {% if overview.callout %}<div class="italic-callout rv d2">{{ overview.callout }}</div>{% endif %}
+
+      <div class="overview-grid rv d2">
+        <div class="ov-cell">
+          <div class="ov-label">Il mio ruolo</div>
+          <div class="ov-value">{{ role }}{% if overview.role_detail %}<small>{{ overview.role_detail }}</small>{% endif %}</div>
+        </div>
+        <div class="ov-cell">
+          <div class="ov-label">Team</div>
+          <div class="ov-value">{{ overview.team }}</div>
+        </div>
+        <div class="ov-cell">
+          <div class="ov-label">Timeline</div>
+          <div class="ov-value">{{ overview.timeline }}</div>
+        </div>
+        <div class="ov-cell">
+          <div class="ov-label">Status</div>
+          <div class="ov-value">{{ overview.status }}</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROBLEMA -->
+    <section class="cs-section" id="problema">
+      <p class="section-eyebrow">Il problema</p>
+      <h2 class="section-heading rv">{{ problema.heading_pre }} <span class="pk">{{ problema.heading_hl }}</span>{% if problema.heading_end %}<br>{{ problema.heading_end }}{% endif %}</h2>
+
+      {% if problema.statement %}<div class="problem-statement rv d1">{{ problema.statement }}</div>{% endif %}
+
+      {% if problema.intro %}<p class="body-text rv d1">{{ problema.intro | safe }}</p>{% endif %}
+
+      <ul class="pain-list rv d2">
+        {% for point in problema.points %}
+        <li class="pain-item">
+          <div class="pain-num">{% if loop.index < 10 %}0{% endif %}{{ loop.index }}</div>
+          <div>
+            <div class="pain-title">{{ point.title }}</div>
+            <div class="pain-desc">{{ point.desc }}</div>
+          </div>
+        </li>
+        {% endfor %}
+      </ul>
+    </section>
+
+    <!-- RESEARCH -->
+    <section class="cs-section" id="research">
+      <p class="section-eyebrow">Research</p>
+      <h2 class="section-heading rv">{{ research.heading_pre }} <span class="gn">{{ research.heading_hl }}</span>{% if research.heading_end %} {{ research.heading_end }}{% endif %}</h2>
+      {% if research.intro %}<p class="body-text rv d1">{{ research.intro | safe }}</p>{% endif %}
+
+      {% if research.insights and research.insights.length %}
+      <div class="insight-cards rv d2">
+        {% for ins in research.insights %}
+        <div class="insight-card">
+          {% if ins.icon %}<div class="insight-icon">{{ ins.icon }}</div>{% endif %}
+          <div class="insight-label">{{ ins.label }}</div>
+          <div class="insight-text">{{ ins.text | safe }}</div>
+        </div>
+        {% endfor %}
+      </div>
+      {% endif %}
+
+      {% if research.quote and research.quote.text %}
+      <div class="quote-block rv d3">
+        <div class="quote-text">"{{ research.quote.text }}"</div>
+        {% if research.quote.source %}<div class="quote-source">{{ research.quote.source }}</div>{% endif %}
+      </div>
+      {% endif %}
+    </section>
+
+    <!-- APPROCCIO -->
+    <section class="cs-section" id="approccio">
+      <p class="section-eyebrow">Approccio &amp; HMW</p>
+      <h2 class="section-heading rv">{{ approccio.heading_pre }} <span class="pk">{{ approccio.heading_hl }}</span>{% if approccio.heading_end %} {{ approccio.heading_end }}{% endif %}</h2>
+
+      {% if approccio.hmw %}<div class="hmw rv d1">{{ approccio.hmw | safe }}</div>{% endif %}
+
+      {% if approccio.intro %}<p class="body-text rv d1">{{ approccio.intro }}</p>{% endif %}
+
+      <ul class="principle-list rv d2">
+        {% for pr in approccio.principles %}
+        <li class="principle-item">
+          <div class="principle-num">{% if loop.index < 10 %}0{% endif %}{{ loop.index }}</div>
+          <div class="principle-body">
+            <div class="principle-title">{{ pr.title }}</div>
+            <div class="principle-desc">{{ pr.desc }}</div>
+          </div>
+        </li>
+        {% endfor %}
+      </ul>
+    </section>
+
+    <!-- FINAL DESIGN -->
+    <section class="cs-section" id="final">
+      <p class="section-eyebrow">Final design</p>
+      <h2 class="section-heading rv">{{ final.heading_line1 }}{% if final.heading_line2 %}<br>{{ final.heading_line2 }}{% endif %}</h2>
+      {% if final.intro %}<p class="body-text rv d1">{{ final.intro | safe }}</p>{% endif %}
+
+      {% for feat in final.features %}
+      <div class="design-feature{% if loop.index0 is odd %} reverse{% endif %} rv d1">
+        <div class="feat-img"><div class="img-ph img-ph-tall"{% if feat.image %} style="background-image:url('{{ feat.image }}');"{% endif %}>{% if not feat.image %}→ Aggiungi screenshot<br>{{ feat.title }}{% endif %}</div></div>
+        <div>
+          <div class="feat-label">Feature {% if loop.index < 10 %}0{% endif %}{{ loop.index }}</div>
+          <div class="feat-title">{{ feat.title }}</div>
+          <div class="feat-body">{{ feat.body | safe }}</div>
+        </div>
+      </div>
+      {% endfor %}
+    </section>
+
+    <!-- RISULTATI -->
+    <section class="cs-section" id="risultati">
+      <p class="section-eyebrow">Risultati</p>
+      <h2 class="section-heading rv">{{ risultati.heading_pre }} <span class="gn">{{ risultati.heading_hl }}</span></h2>
+
+      {% if risultati.metrics and risultati.metrics.length %}
+      <div class="results-metrics rv d1">
+        {% for m in risultati.metrics %}
+        <div class="res-metric">
+          <div class="res-n">{{ m.number }}</div>
+          <div class="res-l">{{ m.label }}</div>
+        </div>
+        {% endfor %}
+      </div>
+      {% endif %}
+
+      {% if risultati.qual and risultati.qual.length %}
+      <div class="qual-results rv d2">
+        {% for q in risultati.qual %}
+        <div class="qual-item">
+          {% if q.icon %}<div class="qual-icon">{{ q.icon }}</div>{% endif %}
+          <div class="qual-body">{{ q.body | safe }}</div>
+        </div>
+        {% endfor %}
+      </div>
+      {% endif %}
+
+      {% for p in risultati.paragraphs %}
+      <p class="body-text rv d3" style="margin-top:24px">{{ p | safe }}</p>
+      {% endfor %}
+    </section>
+
+    <!-- LEARNINGS -->
+    <section class="cs-section" id="learnings">
+      <p class="section-eyebrow">Learnings</p>
+      <h2 class="section-heading rv">{{ learnings.heading_pre }} <span class="pk">{{ learnings.heading_hl }}</span></h2>
+
+      <div class="rv d1">
+        {% for l in learnings.items %}
+        <div class="learning-row">
+          {% if l.icon %}<div class="learning-icon">{{ l.icon }}</div>{% endif %}
+          <div>
+            <div class="learning-title">{{ l.title }}</div>
+            <div class="learning-body">{{ l.body | safe }}</div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </section>
+
+    <!-- CS FOOTER -->
+    <div class="cs-footer">
+      {% if prev_url %}<a href="{{ prev_url }}" class="cs-footer-prev">
+        <div class="cs-footer-dir">← Precedente</div>
+        <div class="cs-footer-title">{{ prev_title }}</div>
+      </a>{% else %}<span></span>{% endif %}
+      <a href="/#work" class="cs-footer-cta">Torna al portfolio →</a>
+      {% if next_url %}<a href="{{ next_url }}" class="cs-footer-next">
+        <div class="cs-footer-dir">Successivo →</div>
+        <div class="cs-footer-title">{{ next_title }}</div>
+      </a>{% else %}<span></span>{% endif %}
+    </div>
+
+  </main>
+</div>
+
+<script>
+/* CURSOR */
+const cur = document.getElementById('cur');
+const ring = document.getElementById('ring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove', e => {
+  mx=e.clientX; my=e.clientY;
+  cur.style.left=mx+'px'; cur.style.top=my+'px';
+});
+(function animR(){
+  rx+=(mx-rx)*.11; ry+=(my-ry)*.11;
+  ring.style.left=rx+'px'; ring.style.top=ry+'px';
+  requestAnimationFrame(animR);
+})();
+document.querySelectorAll('a,button,.pain-item,.insight-card,.res-metric').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{ cur.classList.add('big'); });
+  el.addEventListener('mouseleave',()=>{ cur.classList.remove('big'); });
+});
+
+/* SCROLLSPY */
+const sections = document.querySelectorAll('.cs-section');
+const navLinks = document.querySelectorAll('.sb-nav-item a');
+const spy = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if(e.isIntersecting){
+      navLinks.forEach(l => l.classList.remove('active'));
+      const id = e.target.id;
+      const active = document.querySelector(`.sb-nav-item a[href="#${id}"]`);
+      if(active) active.classList.add('active');
+    }
+  });
+}, { rootMargin:'-20% 0px -70% 0px' });
+sections.forEach(s => spy.observe(s));
+
+/* PROGRESS BAR */
+const fill = document.getElementById('progressFill');
+const pct = document.getElementById('progressPct');
+window.addEventListener('scroll', () => {
+  const scrolled = window.scrollY;
+  const total = document.body.scrollHeight - window.innerHeight;
+  const p = total > 0 ? Math.round((scrolled / total) * 100) : 0;
+  fill.style.width = p + '%';
+  pct.textContent = p + '%';
+}, { passive: true });
+
+/* SMOOTH SIDEBAR NAV */
+navLinks.forEach(link => {
+  link.addEventListener('click', e => {
+    e.preventDefault();
+    const target = document.querySelector(link.getAttribute('href'));
+    if(target) target.scrollIntoView({ behavior:'smooth' });
+  });
+});
+
+/* SCROLL REVEAL */
+const rv = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('in'); rv.unobserve(e.target); }});
+}, { threshold:.08 });
+document.querySelectorAll('.rv').forEach(el => rv.observe(el));
+</script>
+</body>
+</html>

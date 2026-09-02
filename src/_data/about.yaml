@@ -1,4 +1,4 @@
-label: Chi sono
+label: About
 heading_line1: Designer che
 heading_line2: pensa
 heading_highlight: in sistemi
@@ -8,8 +8,8 @@ paragraphs:
     approccio unisce rigore metodologico e sensibilità estetica: ogni decisione
     nasce da dati"
   - ogni pixel porta intenzione.
-cta_primary_text: Guarda i progetti
-cta_secondary_text: Scrivimi!
+cta_primary_text: Take a look at my work.
+cta_secondary_text: Let's have a chat!
 photo: /images/uploads/profile-picture-white-bg.png
 image_tag: Questa sono io!
 stats: []

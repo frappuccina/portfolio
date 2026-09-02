@@ -1,26 +1,28 @@
-label: Casi Studio
-title_line1: Progetti
-title_line2: selezionati
+label: Case studies
+title_line1: Selected
+title_line2: work
 all_link_text: ""
 all_link_url: ""
 featured:
   tag: UX Design · UI Design - 2023
-  title: Redesign del sito Carnevale di Viareggio
-  desc: Rivisitazione dell' architettura informativa e redesign completo del sito.
-  cta_text: Apri case study
-  url: "/lavori/viareggio/"
-  image: /images/uploads/frame-122.png
+  title: Brand, communication and experience redesign
+  desc: Modernising the brand image, communications, and user experience to drive
+    awareness and increase bookings.
+  cta_text: Go the case study
+  url: /lavori/viareggio/
+  image: ""
 items:
   - tag: UX Design · UI Design · Design System
-    title: Redesign del sito Biesse
-    desc: Rivisitazione dell' architettura informativa e redesign completo del sito,
-      con implementazione di un nuovo design system.
+    title: Biesse - Brand, communication and experience redesign
+    desc: Complete redesign of the website, including the implementation of a new
+      design system.
     year: "2024"
-    url: "/lavori/biesse/"
+    url: /lavori/biesse/
     image: ""
   - tag: Design System
     title: Design System Unifarco
-    desc: Design system pensato per convivere con i vincoli tecnici di un CMS esistente.
+    desc: A design system designed to work within the technical constraints of an
+      existing CMS.
     year: "2025"
-    url: "/lavori/unifarco/"
+    url: /lavori/unifarco/
     image: ""

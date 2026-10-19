@@ -699,19 +699,6 @@ a:focus-visible, button:focus-visible, [tabindex]:focus-visible {
     <div class="rv d2"><div class="about-img-box">{% if about.photo %}<img src="{{ about.photo }}" alt="{{ hero.name_line1 }} {{ hero.name_line2 }}">{% endif %}<div class="about-blob-deco" aria-hidden="true"></div></div></div>
   </div>
 </section>
-<section id="skills">
-  <div class="skills-grid">
-    <div><p class="sec-label" data-n="02" style="color:#aaa">{{ skills.label }}</p><h2 class="skills-heading rv">{{ skills.heading_line1 }}<br>{{ skills.heading_line2 }}<br><span class="green">{{ skills.heading_highlight }}</span></h2>
-      <ul class="skill-bar-list">{% for bar in skills.bars %}<li class="skill-bar rv d1"><div class="skill-bar-top"><span class="skill-bar-name">{{ bar.name }}</span><span class="skill-bar-pct">{{ bar.level }}</span></div><div class="skill-track"><div class="skill-fill{% if bar.color == 'pink' %} pink{% endif %}" data-w="{{ bar.percent }}"></div></div></li>{% endfor %}</ul>
-    </div>
-    <div class="tools-wrap rv d2"><p class="sec-label" data-n="" style="color:#aaa">{{ skills.tools_label }}</p><h3 class="tools-heading">{{ skills.tools_heading_line1 }}<br>{{ skills.tools_heading_line2 }}</h3><div class="tools-chips">{% for chip in skills.chips %}<span class="chip{% if chip.highlight %} highlight{% endif %}">{{ chip.text }}</span>{% endfor %}</div><div class="certs-box rv d3"><p class="certs-label">{{ skills.certs_label }}</p>{% for cert in skills.certs %}<div class="cert-item">{{ cert }}</div>{% endfor %}</div></div>
-  </div>
-</section>
-<section id="process">
-  <p class="sec-label" data-n="03" style="color:rgba(240,236,217,.4)">{{ process.label }}</p>
-  <h2 class="work-title rv" style="max-width:600px">{{ process.title }} <span style="color:var(--pink)">{{ process.title_highlight }}</span></h2>
-  <div class="process-row">{% for step in process.steps %}<div class="p-step rv{% if loop.index0 > 0 %} d{{ loop.index0 }}{% endif %}"><div class="p-num">{{ step.num }}</div><h3 class="p-title">{{ step.title }}</h3><p class="p-desc">{{ step.desc }}</p><div class="p-line"></div></div>{% endfor %}</div>
-</section>
 </div>
 
 <div class="page hidden" id="page-cs">
